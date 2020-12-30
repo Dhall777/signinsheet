@@ -1,0 +1,42 @@
+<h1>Show Reservation</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, SigninsheetWeb.ReservationLive.FormComponent,
+    id: @reservation.id,
+    title: @page_title,
+    action: @live_action,
+    reservation: @reservation,
+    return_to: Routes.reservation_show_path(@socket, :show, @reservation) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @reservation.date %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @reservation.name %>
+  </li>
+
+  <li>
+    <strong>Time in:</strong>
+    <%= @reservation.time_in %>
+  </li>
+
+  <li>
+    <strong>Time out:</strong>
+    <%= @reservation.time_out %>
+  </li>
+
+  <li>
+    <strong>Comments:</strong>
+    <%= @reservation.comments %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.reservation_show_path(@socket, :edit, @reservation), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.reservation_index_path(@socket, :index) %></span>

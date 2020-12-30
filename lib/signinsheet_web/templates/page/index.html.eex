@@ -1,0 +1,3 @@
+<div class="mt-4">
+  <%= live_render(@conn, SigninsheetWeb.CalendarLive) %>
+</div>

@@ -1,0 +1,44 @@
+<h1>Listing Reservations</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, SigninsheetWeb.ReservationLive.FormComponent,
+    id: @reservation.id || :new,
+    title: @page_title,
+    action: @live_action,
+    reservation: @reservation,
+    return_to: Routes.reservation_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Time in</th>
+      <th>Time out</th>
+      <th>Comments</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="reservations">
+    <%= for reservation <- @reservations do %>
+      <tr id="reservation-<%= reservation.id %>">
+        <td><%= reservation.date %></td>
+        <td><%= reservation.name %></td>
+        <td><%= reservation.time_in %></td>
+        <td><%= reservation.time_out %></td>
+        <td><%= reservation.comments %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.reservation_show_path(@socket, :show, reservation) %></span>
+          <span><%= live_patch "Edit", to: Routes.reservation_index_path(@socket, :edit, reservation) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: reservation.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Reservation", to: Routes.reservation_index_path(@socket, :new) %></span>
+<p><a href="/">Return to Calendar View</a></p>
