@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :signinsheet, Signinsheet.Repo,
-  username: "darri",
-  password: "r$pJcntR24Qq*54bAlGsQLQ%3uoOVgJk",
+  username: "postgres",
+  password: "postgres",
   database: "signinsheet_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
